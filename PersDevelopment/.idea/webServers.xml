@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="308e7503-1880-4de8-92f2-6d832905a336" name="kuna" url="http://student.agh.edu.pl">
+        <fileTransfer host="student.agh.edu.pl" port="22" rootFolder="/home/eaiibgrp/kuna" accessType="SFTP" password="dfcddfc5dfc1dfc3dfccdfdfdfd9" username="kuna">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

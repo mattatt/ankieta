@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/bootstrap.css" />
+    <link rel="stylesheet" href="../static/css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="../static/css/mainn.css">
+	<link rel="stylesheet" href="../static/css/style.css" />
+    <link rel="stylesheet" href="../static/css/demo.css" />
+    <link rel="stylesheet" href="../static/css/font-awesome.css"/>
+    <link rel="stylesheet" href="../static/css/build.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,100,400" rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+    <title>Social questionnaire</title>
+</head>
+<body>
+  <nav class="navbar navbar-default" role="navigation">
+     <div class="container-fluid">
+<!--header section -->
+          <div class="navbar-header">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+			   <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand" href="/"><i class="fa fa-home dom" aria-hidden="true"></i> HOME</a>
+          </div>
+<!-- menu section -->
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+               <ul class="nav navbar-nav navbar-right">
+               <li><a href="/form">Form</a></li>
+               <li><a href="/statistics">Statistics</a></li>
+               <li><a href="/result">Result</a></li>
+               <li><a href="/usefully">Useful links</a></li>
+			   <li><a href="/contact" style="color:#2ecaef">Contact us</a></li>
+               </ul>
+          </div>
+     </div>
+</nav>
+
+    <div class="container theme-showcase" role="main">
+
+      {% block content %}{% endblock %}
+
+    </div> <!-- /container -->
+
+</body>
+</html>
