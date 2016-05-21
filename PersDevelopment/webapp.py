@@ -1,10 +1,13 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from flask import Flask, render_template, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import statistics
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///formdata.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 'True'
 
@@ -19,7 +22,6 @@ class Formdata(db.Model):
     email = db.Column(db.String)
     sex = db.Column(db.String)
     education = db.Column(db.String)
-
     q1 = db.Column(db.Integer)
     q2 = db.Column(db.Integer)
     q3 = db.Column(db.Integer)
@@ -38,7 +40,8 @@ class Formdata(db.Model):
     q16 = db.Column(db.Integer)
     q17 = db.Column(db.Integer)
 
-    def __init__(self, name, email, sex, education, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15,
+    def __init__(self, name, email, sex, education, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14,
+                 q15,
                  q16, q17):
         self.name = name
         self.email = email
@@ -75,33 +78,12 @@ def main():
 def form():
     return render_template('form.html')
 
-@app.route("/thankyou")
-def thanks():
-    return render_template('thanks.html')
 
-@app.route("/usefully")
-def usefully():
-    return render_template('usefully.html')
-
-
-@app.route('/contact')
-def contact():
-    return render_template('contact.html')
-
-
-# baza danych
 @app.route("/statistics")
-def show_raw():
-    fd = db.session.query(Formdata).all()
-    return render_template('statistics.html', formdata=fd)
-
-
-
-@app.route("/result")
 def show_result():
     fd_list = db.session.query(Formdata).all()
 
-    # Some simple statistics for sample questions - nic nie zmieniałam !!!
+    # Some simple statistics for sample questions
     q1 = []
     q2 = []
     q3 = []
@@ -119,7 +101,6 @@ def show_result():
     q15 = []
     q16 = []
     q17 = []
-    q18 = []
 
     for el in fd_list:
         q1.append(int(el.q1))
@@ -140,25 +121,132 @@ def show_result():
         q16.append(int(el.q16))
         q17.append(int(el.q17))
 
-    #if len(satisfaction) > 0:
-     #   mean_satisfaction = statistics.mean(satisfaction)
-    #else:
-     #   mean_satisfaction = 0
+        if len(q1) > 0:
+            mean_q1 = statistics.mean(q1)
+        else:
+            mean_q1 = 0
 
-    #if len(q1) > 0:
-     #   mean_q1 = statistics.mean(q1)
-    #else:
-     #   mean_q1 = 0
+        if len(q2) > 0:
+            mean_q2 = statistics.mean(q2)
+        else:
+            mean_q2 = 0
 
-    #if len(q2) > 0:
-    #    mean_q2 = statistics.mean(q2)
-    #else:
-    #    mean_q2 = 0
+        if len(q3) > 0:
+            mean_q3 = statistics.mean(q3)
+        else:
+            mean_q3 = 0
 
-    # Prepare data for google charts
-    #data = [['Satisfaction', mean_satisfaction], ['Python skill', mean_q1], ['Flask skill', mean_q2]]
+        if len(q4) > 0:
+            mean_q4 = statistics.mean(q4)
+        else:
+            mean_q4 = 0
 
-    #return render_template('templates/result.html', data=data)
+        if len(q5) > 0:
+            mean_q5 = statistics.mean(q5)
+        else:
+            mean_q5 = 0
+
+        if len(q6) > 0:
+            mean_q6 = statistics.mean(q6)
+        else:
+            mean_q6 = 0
+
+        if len(q7) > 0:
+            mean_q7 = statistics.mean(q7)
+        else:
+            mean_q7 = 0
+
+        if len(q8) > 0:
+            mean_q8 = statistics.mean(q8)
+        else:
+            mean_q8 = 0
+
+        if len(q9) > 0:
+            mean_q9 = statistics.mean(q9)
+        else:
+            mean_q9 = 0
+
+        if len(q10) > 0:
+            mean_q10 = statistics.mean(q10)
+        else:
+            mean_q10 = 0
+
+        if len(q11) > 0:
+            mean_q11 = statistics.mean(q11)
+        else:
+            mean_q11 = 0
+
+        if len(q12) > 0:
+            mean_q12 = statistics.mean(q12)
+        else:
+            mean_q12 = 0
+
+        if len(q13) > 0:
+            mean_q13 = statistics.mean(q13)
+        else:
+            mean_q13 = 0
+
+        if len(q14) > 0:
+            mean_q14 = statistics.mean(q14)
+        else:
+            mean_q14 = 0
+
+        if len(q15) > 0:
+            mean_q15 = statistics.mean(q15)
+        else:
+            mean_q15 = 0
+
+        if len(q16) > 0:
+            mean_q16 = statistics.mean(q16)
+        else:
+            mean_q16 = 0
+
+        if len(q17) > 0:
+            mean_q17 = statistics.mean(q17)
+        else:
+            mean_q17 = 0
+
+        # Prepare data for google charts
+        data = [['Have you ever heard about personal development?', mean_q1],
+                ['Can you organize your time?', mean_q2],
+                ['Can you say \'no\' to jobs or requests that you feel are not your responsibility?', mean_q3],
+                ['Are you making a list of tasks in your daily routine?', mean_q4],
+                ['Don\'t you give up things you do not really want or need to do?', mean_q5],
+                ['How do you feel about changes?', mean_q6],
+                ['Do you eagerly start new activity or accept the challenge?', mean_q7],
+                ['Do you participate in any additional courses?', mean_q8],
+                ['How many courses did you attend last year?', mean_q9],
+                ['Do you believe in possibility of developing yourself without living home?', mean_q10],
+                ['Is the Internet necessary for developing yourself?', mean_q11],
+                ['How many languages have you ever learnt?', mean_q12],
+                ['How many languages do you speak communicatively?', mean_q13],
+                ['How often do you practice sport?', mean_q14],
+                ['How much do you care about money?', mean_q15],
+                ['How much influence does success make on your life?', mean_q16],
+                ['Are family and friends motivation in your life?', mean_q17]]
+
+        return render_template('statistics.html', data=data)
+
+
+@app.route("/raw")
+def show_raw():
+    fd = db.session.query(Formdata).all()
+    return render_template('raw.html', formdata=fd)
+
+
+@app.route("/thankyou")
+def thanks():
+    return render_template('thanks.html')
+
+
+@app.route("/usefully")
+def usefully():
+    return render_template('usefully.html')
+
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
 
 
 @app.route("/save", methods=['POST'])
@@ -166,7 +254,7 @@ def save():
     # Get data from FORM
     name = request.form['name']
     email = request.form['email']
-    sex = request.form['sex']
+    sex = request.form['gender']
     education = request.form['education']
     q1 = request.form['q1']
     q2 = request.form['q2']
@@ -186,13 +274,13 @@ def save():
     q16 = request.form['q16']
     q17 = request.form['q17']
 
-    # Save the data -- baza nie robiłam
+    # Save the data
     fd = Formdata(name, email, sex, education, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15,
                   q16, q17)
     db.session.add(fd)
     db.session.commit()
 
-    return redirect('/')
+    return redirect('/thankyou')
 
 
 if __name__ == "__main__":

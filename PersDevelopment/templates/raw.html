@@ -1,0 +1,74 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="texty">
+    </br></br>
+    <h1>Results</h1>
+    <div id="chart_div"></div>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Created at</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Sex</th>
+        <th>Education</th>
+        <th>Q1</th>
+        <th>Q2</th>
+        <th>Q3</th>
+        <th>Q4</th>
+        <th>Q5</th>
+        <th>Q6</th>
+        <th>Q7</th>
+        <th>Q8</th>
+        <th>Q9</th>
+        <th>Q10</th>
+        <th>Q11</th>
+        <th>Q12</th>
+        <th>Q13</th>
+        <th>Q14</th>
+        <th>Q15</th>
+        <th>Q16</th>
+        <th>Q17</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    {% for element in formdata %}
+    <tr>
+        <td>{{ element.id }}</td>
+        <td>{{ element.created_at }}</td>
+        <td>{{ element.username }}</td>
+        <td>{{ element.email }}</td>
+        <td>{{ element.sex }}</td>
+        <td>{{ element.education }}</td>
+        <td>{{ element.q1 }}</td>
+        <td>{{ element.q2 }}</td>
+        <td>{{ element.q3 }}</td>
+        <td>{{ element.q4 }}</td>
+        <td>{{ element.q5 }}</td>
+        <td>{{ element.q6 }}</td>
+        <td>{{ element.q7 }}</td>
+        <td>{{ element.q8 }}</td>
+        <td>{{ element.q9 }}</td>
+        <td>{{ element.q10 }}</td>
+        <td>{{ element.q11 }}</td>
+        <td>{{ element.q12 }}</td>
+        <td>{{ element.q13 }}</td>
+        <td>{{ element.q14 }}</td>
+        <td>{{ element.q15 }}</td>
+        <td>{{ element.q16 }}</td>
+        <td>{{ element.q17 }}</td>
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
