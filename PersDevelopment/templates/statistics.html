@@ -3,9 +3,22 @@
 
 {% block content %}
 
+<div class="header">
+    <div class="framee">
+
+        Personal development is<br>
+        the conscious choice <br>
+        to improve one's life<br>
+        <br><br>
+
+        <font color="#2ecaef">STATISTICS</font>
+
+    </div>
+</div>
+<br>
+
 <div class="texty">
-    </br></br>
-    <h1>Statistics</h1>
+    <p class="welcome" align="center">Average results</p>
     <div id="chart_div"></div>
 </div>
 
@@ -15,15 +28,83 @@
   google.setOnLoadCallback(drawChart);
   function drawChart() {
     var data = new google.visualization.DataTable();
+
     data.addColumn('string', 'Question');
     data.addColumn('number', 'Average answer');
-    data.addRows( {{ data|tojson }} );
+    data.addRows( {{ data|tojson }});
     var chart = new google.visualization.ColumnChart(
             document.getElementById('chart_div'));
-    chart.draw(data, {legend: 'none', vAxis: {baseline: 0} });
+    chart.draw(data, {legend: 'none', vAxis: {baseline: 0}, series: [{color: '#2ecaef', visibleInLegend: true}] });
   }
 
 
 </script>
+<br>
+
+<table class="table">
+    <tbody>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q1</b> Have you ever heard about personal development?</p></td>
+    </tr>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q2</b> Can you organize your time?</p></td>
+    </tr>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q3</b> Can you say 'no' to jobs or requests that you feel are not
+            your
+            responsibility?</p></td>
+    </tr>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q4</b> Are you making a list of tasks in your daily routine?</p>
+        </td>
+    </tr>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q5</b> Don't you give up things you do not really want or need to
+            do?</p>
+        </td>
+    </tr>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q6</b> Do you easily cope with changes?</p></td>
+    </tr>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q7</b> Do you eagerly start new activity or accept the challenge?
+        </p></td>
+    </tr>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q8</b> Do you participate in any additional courses?</p></td>
+    </tr>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q9</b> Do you believe that taking additional courses is crucial in
+            your
+            personal development?</p></td>
+    </tr>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q10</b> Do you believe in possibility of developing yourself
+            without
+            leaving home?</p></td>
+    </tr>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q11</b> Is the Internet necessary for developing yourself?</p></td>
+    </tr>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q12</b> How many languages have you ever learnt?</p></td>
+    </tr>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q13</b> How many languages do you speak communicatively?</p></td>
+    </tr>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q14</b> How often do you practice sport?</p></td>
+    </tr>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q15</b> How much do you care about money?</p></td>
+    </tr>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q16</b> How much influence does success make on your life?</p></td>
+    </tr>
+    <tr>
+        <td align="left"><p class="table_element"><b>Q17</b> Are family and friends motivation in your life?</p></td>
+    </tr>
+    </tbody>
+</table>
 
 {% endblock %}

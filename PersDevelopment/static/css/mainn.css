@@ -111,6 +111,16 @@
 	font-size: 15px;
 }
 
+.table_element {
+    font-family:'Lato', sans-serif;
+	color: rgb(47,53,62);
+    font-weight: 300;
+}
+
+.contact_ext {
+    @extend .contact;
+    font-weight: 200;
+}
 
 .button, .button_form,
 button,

@@ -207,23 +207,41 @@ def show_result():
             mean_q17 = 0
 
         # Prepare data for google charts
-        data = [['Have you ever heard about personal development?', mean_q1],
-                ['Can you organize your time?', mean_q2],
-                ['Can you say \'no\' to jobs or requests that you feel are not your responsibility?', mean_q3],
-                ['Are you making a list of tasks in your daily routine?', mean_q4],
-                ['Don\'t you give up things you do not really want or need to do?', mean_q5],
-                ['Do you easily cope with changes', mean_q6],
-                ['Do you eagerly start new activity or accept the challenge?', mean_q7],
-                ['Do you participate in any additional courses?', mean_q8],
-                ['Do you believe that taking additional courses is crucial in your personal development?', mean_q9],
-                ['Do you believe in possibility of developing yourself without leaving home?', mean_q10],
-                ['Is the Internet necessary for developing yourself?', mean_q11],
-                ['How many languages have you ever learnt?', mean_q12],
-                ['How many languages do you speak communicatively?', mean_q13],
-                ['How often do you practice sport?', mean_q14],
-                ['How much do you care about money?', mean_q15],
-                ['How much influence does success make on your life?', mean_q16],
-                ['Are family and friends motivation in your life?', mean_q17]]
+        # data = [['Have you ever heard about personal development?', mean_q1],
+        #         ['Can you organize your time?', mean_q2],
+        #         ['Can you say \'no\' to jobs or requests that you feel are not your responsibility?', mean_q3],
+        #         ['Are you making a list of tasks in your daily routine?', mean_q4],
+        #         ['Don\'t you give up things you do not really want or need to do?', mean_q5],
+        #         ['Do you easily cope with changes?', mean_q6],
+        #         ['Do you eagerly start new activity or accept the challenge?', mean_q7],
+        #         ['Do you participate in any additional courses?', mean_q8],
+        #         ['Do you believe that taking additional courses is crucial in your personal development?', mean_q9],
+        #         ['Do you believe in possibility of developing yourself without leaving home?', mean_q10],
+        #         ['Is the Internet necessary for developing yourself?', mean_q11],
+        #         ['How many languages have you ever learnt?', mean_q12],
+        #         ['How many languages do you speak communicatively?', mean_q13],
+        #         ['How often do you practice sport?', mean_q14],
+        #         ['How much do you care about money?', mean_q15],
+        #         ['How much influence does success make on your life?', mean_q16],
+        #         ['Are family and friends motivation in your life?', mean_q17]]
+
+        data = [['Q1', mean_q1],
+                ['Q2', mean_q2],
+                ['Q3', mean_q3],
+                ['Q4', mean_q4],
+                ['Q5', mean_q5],
+                ['Q6', mean_q6],
+                ['Q7', mean_q7],
+                ['Q8', mean_q8],
+                ['Q9', mean_q9],
+                ['Q10', mean_q10],
+                ['Q11', mean_q11],
+                ['Q12', mean_q12],
+                ['Q13', mean_q13],
+                ['Q14', mean_q14],
+                ['Q15', mean_q15],
+                ['Q16', mean_q16],
+                ['Q17', mean_q17]]
 
         return render_template('statistics.html', data=data)
 
