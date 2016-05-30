@@ -206,25 +206,6 @@ def show_result():
         else:
             mean_q17 = 0
 
-        # Prepare data for google charts
-        # data = [['Have you ever heard about personal development?', mean_q1],
-        #         ['Can you organize your time?', mean_q2],
-        #         ['Can you say \'no\' to jobs or requests that you feel are not your responsibility?', mean_q3],
-        #         ['Are you making a list of tasks in your daily routine?', mean_q4],
-        #         ['Don\'t you give up things you do not really want or need to do?', mean_q5],
-        #         ['Do you easily cope with changes?', mean_q6],
-        #         ['Do you eagerly start new activity or accept the challenge?', mean_q7],
-        #         ['Do you participate in any additional courses?', mean_q8],
-        #         ['Do you believe that taking additional courses is crucial in your personal development?', mean_q9],
-        #         ['Do you believe in possibility of developing yourself without leaving home?', mean_q10],
-        #         ['Is the Internet necessary for developing yourself?', mean_q11],
-        #         ['How many languages have you ever learnt?', mean_q12],
-        #         ['How many languages do you speak communicatively?', mean_q13],
-        #         ['How often do you practice sport?', mean_q14],
-        #         ['How much do you care about money?', mean_q15],
-        #         ['How much influence does success make on your life?', mean_q16],
-        #         ['Are family and friends motivation in your life?', mean_q17]]
-
         data = [['Q1', mean_q1],
                 ['Q2', mean_q2],
                 ['Q3', mean_q3],
@@ -257,6 +238,16 @@ def thanks():
     return render_template('thanks.html')
 
 
+@app.route("/emptyform")
+def emptyform():
+    return render_template('empty_form.html')
+
+
+@app.route("/emptyfield")
+def emptyfield():
+    return render_template('empty_field.html')
+
+
 @app.route("/usefully")
 def usefully():
     return render_template('usefully.html')
@@ -270,35 +261,68 @@ def contact():
 @app.route("/save", methods=['POST'])
 def save():
     # Get data from FORM
-    name = request.form['name']
-    email = request.form['email']
-    sex = request.form['gender']
-    education = request.form['education']
-    q1 = request.form['q1']
-    q2 = request.form['q2']
-    q3 = request.form['q3']
-    q4 = request.form['q4']
-    q5 = request.form['q5']
-    q6 = request.form['q6']
-    q7 = request.form['q7']
-    q8 = request.form['q8']
-    q9 = request.form['q9']
-    q10 = request.form['q10']
-    q11 = request.form['q11']
-    q12 = request.form['q12']
-    q13 = request.form['q13']
-    q14 = request.form['q14']
-    q15 = request.form['q15']
-    q16 = request.form['q16']
-    q17 = request.form['q17']
+    try:
+        name = request.form['name']
+        email = request.form['email']
+        sex = request.form['gender']
+        education = request.form['education']
+        q1 = request.form['q1']
+        q2 = request.form['q2']
+        q3 = request.form['q3']
+        q4 = request.form['q4']
+        q5 = request.form['q5']
+        q6 = request.form['q6']
+        q7 = request.form['q7']
+        q8 = request.form['q8']
+        q9 = request.form['q9']
+        q10 = request.form['q10']
+        q11 = request.form['q11']
+        q12 = request.form['q12']
+        q13 = request.form['q13']
+        q14 = request.form['q14']
+        q15 = request.form['q15']
+        q16 = request.form['q16']
+        q17 = request.form['q17']
 
-    # Save the data
-    fd = Formdata(name, email, sex, education, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15,
-                  q16, q17)
-    db.session.add(fd)
-    db.session.commit()
+        form_data = [name, email, sex, education, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15,
+                     q16, q17]
 
-    return redirect('/thankyou')
+        if form_is_empty(form_data):
+            return redirect('/emptyform')
+
+        if form_has_empty_field(form_data):
+            return redirect('/emptyfield')
+        else:
+            # Save the data
+            fd = Formdata(name, email, sex, education, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14, q15,
+                          q16, q17)
+            db.session.add(fd)
+            db.session.commit()
+
+            return redirect('/thankyou')
+
+    except Exception as e:
+        return redirect('/emptyform')
+
+
+def form_is_empty(form_data):
+    is_empty = True
+
+    for i in form_data:
+        if i:
+            is_empty = False
+
+    return is_empty
+
+
+def form_has_empty_field(form_data):
+    has_empty = False
+
+    for i in form_data:
+        if not i:
+            has_empty = True
+
+    return has_empty
 
 
 if __name__ == "__main__":
