@@ -41,8 +41,7 @@ class Formdata(db.Model):
     q17 = db.Column(db.Integer)
 
     def __init__(self, name, email, sex, education, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12, q13, q14,
-                 q15,
-                 q16, q17):
+                 q15,q16, q17):
         self.name = name
         self.email = email
         self.sex = sex
@@ -82,25 +81,13 @@ def form():
 @app.route("/statistics")
 def show_result():
     fd_list = db.session.query(Formdata).all()
-    sex_male = db.session.query(Formdata).filter(Formdata.sex='male'.count())
-    # sex_male = db.session.query(Formdata).filter_by(sex='male').count()
-    sex_female = db.session.query(Formdata).filter(Formdata.sex='female'.count())
-    sex_other = db.session.query(Formdata).filter(Formdata.sex='others'.count())
-    
-    education_primary = db.session.query(Formdata).filter(Formdata.education='primary'.count())
-    education_secondary = db.session.query(Formdata).filter(Formdata.education='secondary'.count())
-    education_higher = db.session.query(Formdata).filter(Formdata.education='higher'.count())
-    
-    #all_sex = sex_male + sex_female + sex.other 
-     #   sex_male = sex_male/all_sex * 100
-      #  sex_female = sex_female/all_sex * 100
-       # sex.other = sex.other/all_sex * 100
-    
-    # all_education = education_primary + education_secondary + education_higher
-      #  education_primary = education_primary/all_education * 100 
-       # education_secondary = education_primary/all_education * 100 
-        # education_higher = education_primary/all_education * 100 
-    
+    sex_male = db.session.query(Formdata).filter_by(sex='male').count()
+    sex_female = db.session.query(Formdata).filter_by(sex='female').count()
+    sex_other = db.session.query(Formdata).filter_by(sex='others').count()
+
+    education_primary = db.session.query(Formdata).filter_by(education='primary').count()
+    education_secondary = db.session.query(Formdata).filter_by(education='secondary').count()
+    education_higher = db.session.query(Formdata).filter_by(education='higher').count()
 
     # Some simple statistics for sample questions
     q1 = []
@@ -140,116 +127,117 @@ def show_result():
         q16.append(int(el.q16))
         q17.append(int(el.q17))
 
-        if len(q1) > 0:
-            mean_q1 = statistics.mean(q1)
-        else:
-            mean_q1 = 0
+    if len(q1) > 0:
+        mean_q1 = statistics.mean(q1)
+    else:
+        mean_q1 = 0
 
-        if len(q2) > 0:
-            mean_q2 = statistics.mean(q2)
-        else:
-            mean_q2 = 0
+    if len(q2) > 0:
+        mean_q2 = statistics.mean(q2)
+    else:
+        mean_q2 = 0
 
-        if len(q3) > 0:
-            mean_q3 = statistics.mean(q3)
-        else:
-            mean_q3 = 0
+    if len(q3) > 0:
+        mean_q3 = statistics.mean(q3)
+    else:
+        mean_q3 = 0
 
-        if len(q4) > 0:
-            mean_q4 = statistics.mean(q4)
-        else:
-            mean_q4 = 0
+    if len(q4) > 0:
+        mean_q4 = statistics.mean(q4)
+    else:
+        mean_q4 = 0
 
-        if len(q5) > 0:
-            mean_q5 = statistics.mean(q5)
-        else:
-            mean_q5 = 0
+    if len(q5) > 0:
+        mean_q5 = statistics.mean(q5)
+    else:
+        mean_q5 = 0
 
-        if len(q6) > 0:
-            mean_q6 = statistics.mean(q6)
-        else:
-            mean_q6 = 0
+    if len(q6) > 0:
+        mean_q6 = statistics.mean(q6)
+    else:
+        mean_q6 = 0
 
-        if len(q7) > 0:
-            mean_q7 = statistics.mean(q7)
-        else:
-            mean_q7 = 0
+    if len(q7) > 0:
+        mean_q7 = statistics.mean(q7)
+    else:
+        mean_q7 = 0
 
-        if len(q8) > 0:
-            mean_q8 = statistics.mean(q8)
-        else:
-            mean_q8 = 0
+    if len(q8) > 0:
+        mean_q8 = statistics.mean(q8)
+    else:
+        mean_q8 = 0
 
-        if len(q9) > 0:
-            mean_q9 = statistics.mean(q9)
-        else:
-            mean_q9 = 0
+    if len(q9) > 0:
+        mean_q9 = statistics.mean(q9)
+    else:
+        mean_q9 = 0
 
-        if len(q10) > 0:
-            mean_q10 = statistics.mean(q10)
-        else:
-            mean_q10 = 0
+    if len(q10) > 0:
+        mean_q10 = statistics.mean(q10)
+    else:
+        mean_q10 = 0
 
-        if len(q11) > 0:
-            mean_q11 = statistics.mean(q11)
-        else:
-            mean_q11 = 0
+    if len(q11) > 0:
+        mean_q11 = statistics.mean(q11)
+    else:
+        mean_q11 = 0
 
-        if len(q12) > 0:
-            mean_q12 = statistics.mean(q12)
-        else:
-            mean_q12 = 0
+    if len(q12) > 0:
+        mean_q12 = statistics.mean(q12)
+    else:
+        mean_q12 = 0
 
-        if len(q13) > 0:
-            mean_q13 = statistics.mean(q13)
-        else:
-            mean_q13 = 0
+    if len(q13) > 0:
+        mean_q13 = statistics.mean(q13)
+    else:
+        mean_q13 = 0
 
-        if len(q14) > 0:
-            mean_q14 = statistics.mean(q14)
-        else:
-            mean_q14 = 0
+    if len(q14) > 0:
+        mean_q14 = statistics.mean(q14)
+    else:
+        mean_q14 = 0
 
-        if len(q15) > 0:
-            mean_q15 = statistics.mean(q15)
-        else:
-            mean_q15 = 0
+    if len(q15) > 0:
+        mean_q15 = statistics.mean(q15)
+    else:
+        mean_q15 = 0
 
-        if len(q16) > 0:
-            mean_q16 = statistics.mean(q16)
-        else:
-            mean_q16 = 0
+    if len(q16) > 0:
+        mean_q16 = statistics.mean(q16)
+    else:
+        mean_q16 = 0
 
-        if len(q17) > 0:
-            mean_q17 = statistics.mean(q17)
-        else:
-            mean_q17 = 0
+    if len(q17) > 0:
+        mean_q17 = statistics.mean(q17)
+    else:
+        mean_q17 = 0
 
-        data = [['Male'], sex_male],
-                ['Female'], sex_female],
-                ['Others'], sex_other],
-                ['Primary',education_primary],
-                ['Secondary',education_secondary],
-                ['Higher',education_higher],
-                ['Q1', mean_q1],
-                ['Q2', mean_q2],
-                ['Q3', mean_q3],
-                ['Q4', mean_q4],
-                ['Q5', mean_q5],
-                ['Q6', mean_q6],
-                ['Q7', mean_q7],
-                ['Q8', mean_q8],
-                ['Q9', mean_q9],
-                ['Q10', mean_q10],
-                ['Q11', mean_q11],
-                ['Q12', mean_q12],
-                ['Q13', mean_q13],
-                ['Q14', mean_q14],
-                ['Q15', mean_q15],
-                ['Q16', mean_q16],
-                ['Q17', mean_q17]]
+    # Prepare data for google charts
+    data = [['Male', sex_male],
+            ['Female', sex_female],
+            ['Others', sex_other],
+            ['Primary',education_primary],
+            ['Secondary',education_secondary],
+            ['Higher',education_higher],
+            ['Q1', mean_q1],
+            ['Q2', mean_q2],
+            ['Q3', mean_q3],
+            ['Q4', mean_q4],
+            ['Q5', mean_q5],
+            ['Q6', mean_q6],
+            ['Q7', mean_q7],
+            ['Q8', mean_q8],
+            ['Q9', mean_q9],
+            ['Q10', mean_q10],
+            ['Q11', mean_q11],
+            ['Q12', mean_q12],
+            ['Q13', mean_q13],
+            ['Q14', mean_q14],
+            ['Q15', mean_q15],
+            ['Q16', mean_q16],
+            ['Q17', mean_q17]]
 
-        return render_template('statistics.html', data=data)
+    return render_template('statistics.html', data=data)
 
 
 @app.route("/raw")
