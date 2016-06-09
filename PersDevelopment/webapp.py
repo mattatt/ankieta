@@ -91,15 +91,15 @@ def show_result():
     education_secondary = db.session.query(Formdata).filter(Formdata.education='secondary'.count())
     education_higher = db.session.query(Formdata).filter(Formdata.education='higher'.count())
     
-    all_sex = sex_male + sex_female + sex.other 
-        sex_male = sex_male/all_sex * 100
-        sex_female = sex_female/all_sex * 100
-        sex.other = sex.other/all_sex * 100
+    #all_sex = sex_male + sex_female + sex.other 
+     #   sex_male = sex_male/all_sex * 100
+      #  sex_female = sex_female/all_sex * 100
+       # sex.other = sex.other/all_sex * 100
     
-    all_education = education_primary + education_secondary + education_higher
-        education_primary = education_primary/all_education * 100 
-        education_secondary = education_primary/all_education * 100 
-        education_higher = education_primary/all_education * 100 
+    # all_education = education_primary + education_secondary + education_higher
+      #  education_primary = education_primary/all_education * 100 
+       # education_secondary = education_primary/all_education * 100 
+        # education_higher = education_primary/all_education * 100 
     
 
     # Some simple statistics for sample questions
