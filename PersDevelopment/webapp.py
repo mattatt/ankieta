@@ -82,6 +82,25 @@ def form():
 @app.route("/statistics")
 def show_result():
     fd_list = db.session.query(Formdata).all()
+    sex_male = db.session.query(Formdata).filter(Formdata.sex='male'.count())
+    # sex_male = db.session.query(Formdata).filter_by(sex='male').count()
+    sex_female = db.session.query(Formdata).filter(Formdata.sex='female'.count())
+    sex_other = db.session.query(Formdata).filter(Formdata.sex='others'.count())
+    
+    education_primary = db.session.query(Formdata).filter(Formdata.education='primary'.count())
+    education_secondary = db.session.query(Formdata).filter(Formdata.education='secondary'.count())
+    education_higher = db.session.query(Formdata).filter(Formdata.education='higher'.count())
+    
+    all_sex = sex_male + sex_female + sex.other 
+        sex_male = sex_male/all_sex * 100
+        sex_female = sex_female/all_sex * 100
+        sex.other = sex.other/all_sex * 100
+    
+    all_education = education_primary + education_secondary + education_higher
+        education_primary = education_primary/all_education * 100 
+        education_secondary = education_primary/all_education * 100 
+        education_higher = education_primary/all_education * 100 
+    
 
     # Some simple statistics for sample questions
     q1 = []
@@ -206,7 +225,13 @@ def show_result():
         else:
             mean_q17 = 0
 
-        data = [['Q1', mean_q1],
+        data = [['Male'], sex_male],
+                ['Female'], sex_female],
+                ['Others'], sex_other],
+                ['Primary',education_primary],
+                ['Secondary',education_secondary],
+                ['Higher',education_higher],
+                ['Q1', mean_q1],
                 ['Q2', mean_q2],
                 ['Q3', mean_q3],
                 ['Q4', mean_q4],
