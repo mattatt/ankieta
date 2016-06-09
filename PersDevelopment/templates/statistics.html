@@ -27,14 +27,45 @@
   google.load('visualization', '1', {'packages':['corechart']});
   google.setOnLoadCallback(drawChart);
   function drawChart() {
-    var data = new google.visualization.DataTable();
-
-    data.addColumn('string', 'Question');
-    data.addColumn('number', 'Average answer');
-    data.addRows( {{ data|tojson }});
-    var chart = new google.visualization.ColumnChart(
+      
+    var data1 = new google.visualization.DataTable([
+        {{ data[0:3] }}
+        ]);
+    
+    var data2 = new google.visualization.DataTable([
+        {{ data[3:6] }}
+        ]);
+                
+    var data3 = new google.visualization.DataTable();
+        data3.addColumn('string', 'Question');
+        data3.addColumn('number', 'Average answer');
+        data3.addRows( {{ data[6:22] }});
+        
+    var options = {
+        title: 'Sex',
+        'width':400,
+        'height':300,
+        colors: ['#0c7c99','#2ecaef','#baeef9'],
+        is3D: true,
+        };
+    
+    var options2 = {
+        title: 'Education',
+        'width':400,
+        'height':300,
+        colors: ['#0c7c99','#2ecaef','#baeef9'],
+        is3D: true,
+        };
+    
+    var chart1 = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data1, options1);
+        
+    var chart2 = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data2, options2);
+    
+    var chart3 = new google.visualization.ColumnChart(
             document.getElementById('chart_div'));
-    chart.draw(data, {legend: 'none', vAxis: {baseline: 0}, series: [{color: '#2ecaef', visibleInLegend: true}] });
+    chart.draw(data3, {legend: 'none', vAxis: {baseline: 0}, series: [{color: '#2ecaef', visibleInLegend: true}] });
   }
 
 
