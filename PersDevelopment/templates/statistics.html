@@ -3,6 +3,95 @@
 
 {% block content %}
 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+
+    google.load('visualization', '1.0', {'packages':['corechart']});
+    google.setOnLoadCallback(drawChart);
+
+    var myData = {{ data|tojson }};
+
+    function drawChart() {
+
+        var data1 = new google.visualization.DataTable();
+        data1.addColumn('string', 'Sex');
+        data1.addColumn('number', ' ');
+        data1.addRows([
+            myData[0],
+            myData[1],
+            myData[2]
+        ]);
+
+        var data2 = new google.visualization.DataTable();
+        data2.addColumn('string', 'Education');
+        data2.addColumn('number', ' ');
+        data2.addRows([
+            myData[3],
+            myData[4],
+            myData[5]
+        ]);
+
+        var data3 = new google.visualization.DataTable();
+        data3.addColumn('string', 'Question');
+        data3.addColumn('number', 'Average answer');
+        data3.addRows([
+                myData[6],
+                myData[7],
+                myData[8],
+                myData[9],
+                myData[10],
+                myData[11],
+                myData[12],
+                myData[13],
+                myData[14],
+                myData[15],
+                myData[16],
+                myData[17],
+                myData[18],
+                myData[19],
+                myData[20],
+                myData[21],
+                myData[22]
+            ]);
+
+        var options1 = {
+            'title': 'Sex',
+            'width': 500,
+            'height': 400,
+            colors: ['#0c7c99', '#2ecaef', '#baeef9'],
+            is3D: true,
+            titleTextStyle: {fontName: 'Lato', fontSize: '30'},
+        };
+
+        var options2 = {
+            'title':'Education',
+            'width':500,
+            'height':400,
+            colors: ['#0c7c99','#2ecaef','#baeef9'],
+            is3D: true,
+            titleTextStyle: {fontName: 'Lato', fontSize: '30'}
+        };
+
+        var options3 = {
+            'title':'Average result',
+            colors: ['#0c7c99'],
+            is3D: true,
+            titleTextStyle: {fontName: 'Lato', fontSize: '30'},
+            legend: 'none',
+            vAxis: {baseline: 0}
+        };
+
+        var chart1 = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart1.draw(data1, options1);
+
+        var chart2 = new google.visualization.PieChart(document.getElementById('chart_div2'));
+        chart2.draw(data2, options2);
+
+        var chart3 = new google.visualization.ColumnChart(document.getElementById('chart_div3'));
+        chart3.draw(data3, options3);
+    }
+</script>
+
 <div class="header">
     <div class="framee">
 
@@ -11,131 +100,25 @@
         to improve one's life<br>
         <br><br>
 
-        <font color="#2ecaef">STATISTICS</font>
+        <font color="#2ecaef"><b>STATISTICS</b></font>
 
     </div>
 </div>
 <br>
 
 <div class="texty">
-    <p class="welcome" align="center">Average results</p>
-    <div id="chart_div"></div>
+    <div class="col-md-6">
+        <div id="chart_div" align="center"></div>
+        </div>
+    <div class="col-md-6">
+        <div id="chart_div2" align="center"></div>
+        </div>
+    <div class="col-md-12">
+        <div id="chart_div3" align="center"></div>
+        </div>
+
 </div>
 
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-  google.load('visualization', '1', {'packages':['corechart']});
-  google.setOnLoadCallback(drawChart);
-  function drawChart() {
-      
-    var data1 = new google.visualization.DataTable([
-        {{ data[0:3] }}
-        ]);
-    
-    var data2 = new google.visualization.DataTable([
-        {{ data[3:6] }}
-        ]);
-                
-    var data3 = new google.visualization.DataTable();
-        data3.addColumn('string', 'Question');
-        data3.addColumn('number', 'Average answer');
-        data3.addRows( {{ data[6:22] }});
-        
-    var options = {
-        title: 'Sex',
-        'width':400,
-        'height':300,
-        colors: ['#0c7c99','#2ecaef','#baeef9'],
-        is3D: true,
-        };
-    
-    var options2 = {
-        title: 'Education',
-        'width':400,
-        'height':300,
-        colors: ['#0c7c99','#2ecaef','#baeef9'],
-        is3D: true,
-        };
-    
-    var chart1 = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        chart.draw(data1, options1);
-        
-    var chart2 = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        chart.draw(data2, options2);
-    
-    var chart3 = new google.visualization.ColumnChart(
-            document.getElementById('chart_div'));
-    chart.draw(data3, {legend: 'none', vAxis: {baseline: 0}, series: [{color: '#2ecaef', visibleInLegend: true}] });
-  }
 
-
-</script>
-<br>
-
-<table class="table">
-    <tbody>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q1</b> Have you ever heard about personal development?</p></td>
-    </tr>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q2</b> Can you organize your time?</p></td>
-    </tr>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q3</b> Can you say 'no' to jobs or requests that you feel are not
-            your
-            responsibility?</p></td>
-    </tr>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q4</b> Are you making a list of tasks in your daily routine?</p>
-        </td>
-    </tr>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q5</b> Don't you give up things you do not really want or need to
-            do?</p>
-        </td>
-    </tr>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q6</b> Do you easily cope with changes?</p></td>
-    </tr>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q7</b> Do you eagerly start new activity or accept the challenge?
-        </p></td>
-    </tr>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q8</b> Do you participate in any additional courses?</p></td>
-    </tr>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q9</b> Do you believe that taking additional courses is crucial in
-            your
-            personal development?</p></td>
-    </tr>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q10</b> Do you believe in possibility of developing yourself
-            without
-            leaving home?</p></td>
-    </tr>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q11</b> Is the Internet necessary for developing yourself?</p></td>
-    </tr>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q12</b> How many languages have you ever learnt?</p></td>
-    </tr>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q13</b> How many languages do you speak communicatively?</p></td>
-    </tr>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q14</b> How often do you practice sport?</p></td>
-    </tr>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q15</b> How much do you care about money?</p></td>
-    </tr>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q16</b> How much influence does success make on your life?</p></td>
-    </tr>
-    <tr>
-        <td align="left"><p class="table_element"><b>Q17</b> Are family and friends motivation in your life?</p></td>
-    </tr>
-    </tbody>
-</table>
 
 {% endblock %}
