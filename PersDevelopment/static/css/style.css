@@ -5,7 +5,7 @@
 .form p.contact { font-size: 12px; margin:0px 0px 10px 0;line-height: 14px; font-family:Arial, Helvetica;}
 
 .form input[type="text"] { width: 90%; }
-.form label { color: rgb(47,53,62); font-weight:bold;font-size: 14px;font-family:'Lato', sans-serif; }
+.form label { color: rgb(47,53,62); font-weight:normal;font-size: 14px;font-family:'Lato', sans-serif; }
 .form input, textarea { background-color: white; border: 1px solid rgba(122, 192, 0, 0.15); padding: 7px; font-family: Keffeesatz, Arial; color: #4b4b4b; font-size: 14px; -webkit-border-radius: 5px; margin-bottom: 15px; margin-top: -10px; }
 .form input:focus, textarea:focus { border: 1px solid #2ecaef; background-color: rgba(255, 255, 255, 1); }
 .form .select-style {
