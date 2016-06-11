@@ -3,6 +3,7 @@
 
 from flask import Flask, render_template, redirect, request
 from flask_sqlalchemy import SQLAlchemy
+from flask_mail import Mail, Message
 from datetime import datetime
 import statistics
 
@@ -10,7 +11,16 @@ app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///formdata.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 'True'
-
+app.config.update(
+    DEBUG=True,
+    #EMAIL SETTING
+    MAIL_SERVER='smtp.gmail.com',
+    MAIL_PORT=465,
+    MAIL_USE_SSL=True,
+    MAIL_USERNAME= 'personal.development.form@gmail.com',
+    MAIL_PASSWORD= 'haslo1231'
+)
+mail = Mail(app)
 db = SQLAlchemy(app)
 
 
@@ -250,6 +260,9 @@ def show_raw():
 def thanks():
     return render_template('thanks.html')
 
+@app.route("/thankyou2")
+def thanks2():
+    return render_template('thanks2.html')
 
 @app.route("/emptyform")
 def emptyform():
@@ -269,6 +282,26 @@ def usefully():
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+
+@app.route("/send_mail", methods=['POST'])
+def send_mail():
+    # Get data from FORM
+    try:
+        name = request.form['name']
+        email = request.form['email']
+        text = request.form['text']
+        msg = Message(name + " " + email,
+           sender="personal.development.form@gmail.com",
+           recipients=["personal.development.form@gmail.com"])
+        msg.body = "Wiadomość od: " + name + "\n" + \
+                    "Email: " + email + "\n" \
+                    "Treść: " + text + "\n"
+        mail.send(msg)
+        return redirect('/thankyou2')
+    except Exception as e:
+        return redirect('/emptyfield')
+
 
 
 @app.route("/save", methods=['POST'])
