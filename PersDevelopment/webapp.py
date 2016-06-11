@@ -250,10 +250,10 @@ def show_result():
     return render_template('statistics.html', data=data)
 
 
-@app.route("/raw")
-def show_raw():
-    fd = db.session.query(Formdata).all()
-    return render_template('raw.html', formdata=fd)
+#@app.route("/raw")
+#def show_raw():
+#    fd = db.session.query(Formdata).all()
+#    return render_template('raw.html', formdata=fd)
 
 
 @app.route("/thankyou")
